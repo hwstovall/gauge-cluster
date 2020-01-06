@@ -3,6 +3,15 @@ import QtQuick.Shapes 1.14
 
 
 Item {
+    property real speed
+    property string units
+
+    property int numBigTicks: units === 'kmh' ? 7 : 10
+    property int bigTickInterval: units === 'kmh' ? 50 : 25
+    property int numSmallTicks: numBigTicks * 5 - 4
+
+    property int maxDisplayableSpeed: (numBigTicks - 1) * bigTickInterval
+
     id: component
 
     width: 400
@@ -66,11 +75,11 @@ Item {
       Big Ticks
     */
     Repeater {
-        model: 7
+        model: numBigTicks
 
         delegate: Item {
             width: component.width / 2 - 2
-            rotation: (280 / 6) * index - 50
+            rotation: (280 / (numBigTicks - 1)) * index - 50
             transformOrigin: Item.Right
 
             anchors.right: parent.horizontalCenter
@@ -80,7 +89,7 @@ Item {
             Rectangle {
                 id: bigTick
 
-                visible: index > 0 && index < 6
+                visible: index > 0 && index < (numBigTicks - 1)
 
                 width: 20
                 height: 4
@@ -95,7 +104,7 @@ Item {
             Text {
                 rotation: -parent.rotation
 
-                text: index * 50
+                text: index * bigTickInterval
                 font.pixelSize: 20
                 font.bold: true
                 color: "white"
@@ -111,13 +120,13 @@ Item {
       Small Ticks
     */
     Repeater {
-        model: 31
+        model: numSmallTicks
 
         delegate: Item {
             visible: index % 5
 
             width: component.width / 2 - 4
-            rotation: (280 / 30) * index - 50
+            rotation: (280 / (numSmallTicks - 1)) * index - 50
             transformOrigin: Item.Right
 
             anchors.right: parent.horizontalCenter
@@ -139,20 +148,41 @@ Item {
     }
 
     /*
+      Units
+    */
+    Text {
+        text: units
+
+        color: 'white'
+        font.bold: true
+        font.capitalization: Font.AllUppercase
+
+        anchors.horizontalCenter: component.horizontalCenter
+        anchors.bottom: component.bottom
+        anchors.bottomMargin: 30
+    }
+
+    /*
       Needle
     */
-//    Rectangle {
-//        id: needle
+    Item {
+        width: component.width
+        rotation: speed > maxDisplayableSpeed ? 230 : (280 / maxDisplayableSpeed) * speed - 50
 
-//        width: component.width / 2
-//        height: 2
-//        rotation: 45
-//        transformOrigin: Item.Right
+        anchors.centerIn: component
 
-//        color: "white"
+        Behavior on rotation { PropertyAnimation {} }
 
-//        anchors.right: component.horizontalCenter
-//        anchors.bottom: component.verticalCenter
-//        anchors.bottomMargin: -height / 2
-//    }
+        Rectangle {
+            id: needle
+
+            width: 30
+            height: 4
+
+            color: "red"
+
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+        }
+    }
 }
