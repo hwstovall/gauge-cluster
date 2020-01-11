@@ -17,7 +17,7 @@ Window {
     */
     Item {
         property real speed: 0
-        property string units: 'kmh'
+        property string units: 'km/h'
 
         id: debugHarness
         focus: true
@@ -32,7 +32,7 @@ Window {
                 }
             }
             else if (event.key === Qt.Key_U) {
-                units = units === 'mph' ? 'kmh' : 'mph';
+                units = units === 'mph' ? 'km/h' : 'mph';
             }
         }
     }
@@ -43,7 +43,7 @@ Window {
     Item {
         anchors.centerIn: parent
 
-        Speedometer {
+        LeftGuage {
             speed: debugHarness.speed
             units: debugHarness.units
 
