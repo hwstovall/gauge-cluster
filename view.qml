@@ -17,6 +17,8 @@ Window {
     */
     Item {
         property real speed: 0
+        property real cruiseSpeed: 0
+
         property string units: 'km/h'
 
         id: debugHarness
@@ -34,6 +36,9 @@ Window {
             else if (event.key === Qt.Key_U) {
                 units = units === 'mph' ? 'km/h' : 'mph';
             }
+            else if (event.key === Qt.Key_C) {
+                cruiseSpeed = cruiseSpeed == 0 && speed >= 25 ? speed : 0;
+            }
         }
     }
 
@@ -45,6 +50,8 @@ Window {
 
         LeftGuage {
             speed: debugHarness.speed
+            cruiseSpeed: debugHarness.cruiseSpeed
+
             units: debugHarness.units
 
             anchors.centerIn: parent

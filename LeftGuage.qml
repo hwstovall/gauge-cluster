@@ -5,16 +5,22 @@ import QtQuick.Shapes 1.14
 
 Item {
     property real speed
+    property real cruiseSpeed
+
     property string units
 
-    property int numBigTicks: units === 'km/h' ? 7 : 10
+    property int maxDisplayableSpeed: units === 'km/h' ? 300 : 225
+
+    // Tick Config
     property int bigTickInterval: units === 'km/h' ? 50 : 25
+    property int numBigTicks: maxDisplayableSpeed / bigTickInterval + 1
     property int numSmallTicks: numBigTicks * 5 - 4
-
-    property int maxDisplayableSpeed: (numBigTicks - 1) * bigTickInterval
-
-    // This will be used for darkening the small ticks
     property real smallTickInterval: maxDisplayableSpeed / numSmallTicks
+
+    // Angles
+    property int guageSweepAngle: 280
+    property int guageAngleStart: -50
+    property int guageAngleEnd: guageAngleStart + guageSweepAngle
 
     id: component
 
@@ -48,6 +54,7 @@ Item {
             ShapePath {
                 strokeWidth: 10
                 strokeColor: "#35363a"
+                capStyle: ShapePath.FlatCap
                 fillColor: "transparent"
 
                 startX: 0; startY: 0
@@ -55,14 +62,15 @@ Item {
                 PathAngleArc {
                     centerX: component.width / 2; centerY: component.height / 2
                     radiusX: component.width / 2 - 10; radiusY: component.height / 2 - 10
-                    startAngle: 130
-                    sweepAngle: 280
+                    startAngle: guageAngleStart + 180
+                    sweepAngle: guageSweepAngle
                 }
             }
 
             ShapePath {
                 strokeWidth: 2
                 strokeColor: "white"
+                capStyle: ShapePath.FlatCap
                 fillColor: "transparent"
 
                 startX: 0; startY: 0
@@ -70,8 +78,8 @@ Item {
                 PathAngleArc {
                     centerX: component.width / 2; centerY: component.height / 2
                     radiusX: component.width / 2; radiusY: component.height / 2
-                    startAngle: 127.5
-                    sweepAngle: 285
+                    startAngle: guageAngleStart + 180 - 1
+                    sweepAngle: guageSweepAngle + 2
                 }
             }
         }
@@ -79,7 +87,7 @@ Item {
         Item {
             width: parent.width
 
-            rotation: -52.5
+            rotation: guageAngleStart - 1
             transformOrigin: Item.Center
 
             anchors.centerIn: parent
@@ -99,7 +107,7 @@ Item {
         Item {
             width: parent.width
 
-            rotation: 232.5
+            rotation: guageAngleEnd + 1
             transformOrigin: Item.Center
 
             anchors.centerIn: parent
@@ -123,11 +131,13 @@ Item {
     Shape {
         width: component.width
         height: component.height
+
         anchors.centerIn: component
 
         ShapePath {
             strokeWidth: 10
             strokeColor: "white"
+            capStyle: ShapePath.FlatCap
             fillColor: "transparent"
 
             startX: 0; startY: 0
@@ -137,8 +147,8 @@ Item {
 
                 centerX: component.width / 2; centerY: component.height / 2
                 radiusX: component.width / 2 - 10; radiusY: component.height / 2 - 10
-                startAngle: 130
-                sweepAngle: speed > maxDisplayableSpeed ? 280 : (280 / maxDisplayableSpeed) * speed
+                startAngle: guageAngleStart - 180
+                sweepAngle: speed > maxDisplayableSpeed ? guageSweepAngle : (guageSweepAngle / maxDisplayableSpeed) * speed
             }
         }
     }
@@ -150,19 +160,19 @@ Item {
         model: numBigTicks
 
         delegate: Item {
-            width: component.width / 2 - 2
-            rotation: (280 / (numBigTicks - 1)) * index - 50
-            transformOrigin: Item.Right
+            width: component.width
 
-            anchors.right: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
+            rotation: (guageSweepAngle / (numBigTicks - 1)) * index - 50
+            transformOrigin: Item.Center
+
+            anchors.centerIn: parent
 
             Rectangle {
                 id: bigTick
 
                 visible: index > 0 && index < (numBigTicks - 1)
 
-                width: 15
+                width: 18
                 height: 4
                 radius: 2
 
@@ -176,7 +186,7 @@ Item {
                     transparentBorder: true
                     horizontalOffset: 0
                     verticalOffset: 0
-                    radius: 10
+                    radius: 5
                     samples: 10
                     color: "#35363a"
                 }
@@ -270,5 +280,42 @@ Item {
                 text: unitText.text
             }
         }
+    }
+
+    /*
+      Cruise Indicator
+    */
+    Item {
+        visible: cruiseSpeed > 0
+
+        width: parent.width + 20
+
+        rotation: cruiseSpeed > maxDisplayableSpeed ? 230 : (280 / maxDisplayableSpeed) * cruiseSpeed - 50
+        transformOrigin: Item.Center
+
+        anchors.centerIn: parent
+
+        Shape {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+
+            ShapePath {
+                fillColor: 'white'
+
+                startX: 0; startY: 0
+
+                PathLine { relativeX: 20; relativeY: 10 }
+                PathLine { relativeX: -20; relativeY: 10 }
+                PathLine { x: 0; y: 0 }
+            }
+        }
+    }
+
+    Text {
+        text: 'Speed: ' + speed
+
+        color: 'white'
+
+        anchors.centerIn: parent
     }
 }
