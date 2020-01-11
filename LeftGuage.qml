@@ -288,14 +288,20 @@ Item {
     Item {
         visible: cruiseSpeed > 0
 
-        width: parent.width + 20
+        width: parent.width + 22.5
 
-        rotation: cruiseSpeed > maxDisplayableSpeed ? 230 : (280 / maxDisplayableSpeed) * cruiseSpeed - 50
+        rotation: cruiseSpeed > maxDisplayableSpeed ? guageAngleEnd : (guageSweepAngle / maxDisplayableSpeed) * cruiseSpeed - 50
         transformOrigin: Item.Center
 
         anchors.centerIn: parent
 
         Shape {
+            width: 10
+            height: 10
+
+            layer.enabled: true
+            layer.samples: 4
+
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
 
@@ -304,9 +310,9 @@ Item {
 
                 startX: 0; startY: 0
 
-                PathLine { relativeX: 20; relativeY: 10 }
-                PathLine { relativeX: -20; relativeY: 10 }
                 PathLine { x: 0; y: 0 }
+                PathLine { x: 7.5; y: 5 }
+                PathLine { x: 0; y: 10 }
             }
         }
     }
