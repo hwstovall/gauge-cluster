@@ -316,12 +316,4 @@ Item {
             }
         }
     }
-
-    Text {
-        text: 'Speed: ' + speed
-
-        color: 'white'
-
-        anchors.centerIn: parent
-    }
 }
