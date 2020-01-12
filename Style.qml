@@ -8,4 +8,6 @@ QtObject {
 
     property color guageBackground: 'black'
     property color guageFill: gray
+
+    property color lowFuelColor: 'orange'
 }

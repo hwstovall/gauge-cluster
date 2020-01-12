@@ -8,8 +8,12 @@ has one of the best digital clusters on the market right now, I decided to imple
 ![Current Screenshot](/images/current-screenshot.png)
 
 ## Changelog
-* January 12, 2019 - Started ChargeGuage.
+* January 12, 2019 - Implement ChargeGuage.
 * January 11, 2019 - Layed out tri-guage layout.
+
+## TODO
+* Figure out how to animate ChargeGuage flattening.
+* Source or create icons.
 
 ## Try it Out
 ### Install
@@ -33,6 +37,14 @@ has one of the best digital clusters on the market right now, I decided to imple
     <tr>
       <td>Down</td>
       <td>Decrease speed</td>
+    </tr>
+    <tr>
+      <td>Left</td>
+      <td>Decrease range</td>
+    </tr>
+    <tr>
+      <td>Right</td>
+      <td>Increase range</td>
     </tr>
     <tr>
       <td>U</td>

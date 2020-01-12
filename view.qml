@@ -18,7 +18,7 @@ Window {
     Item {
         property real speed: 0
         property real cruiseSpeed: 0
-        property real range: 283
+        property real charge: 1.0
 
         property string units: 'km'
 
@@ -34,6 +34,16 @@ Window {
             else if (event.key === Qt.Key_Down) {
                 if (speed > 0) {
                     speed -= 10;
+                }
+            }
+            else if (event.key === Qt.Key_Right) {
+                if (charge < 1) {
+                    charge += 0.05;
+                }
+            }
+            else if (event.key === Qt.Key_Left) {
+                if (charge > 0) {
+                    charge -= 0.05;
                 }
             }
             else if (event.key === Qt.Key_U) {
@@ -103,8 +113,9 @@ Window {
           Charge Guage
         */
         ChargeGuage {
-            range: debugHarness.range
+            range: 280 * debugHarness.charge
             units: debugHarness.units
+            charge: debugHarness.charge
 
             anchors.fill: centerGuage
         }
