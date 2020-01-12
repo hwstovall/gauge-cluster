@@ -1,3 +1,3 @@
 {
-    "files": ["main.py","LeftGuage.qml","view.qml","CenterGuage.qml"]
+    "files": ["CenterGuage.qml","LeftGuage.qml","view.qml","main.py","GuageOutline.qml","RightGuage.qml"]
 }

@@ -9,10 +9,12 @@ Item {
 
     property string units
 
-    property int maxDisplayableSpeed: units === 'km/h' ? 300 : 225
+    property int odometer
+
+    property int maxDisplayableSpeed: units === 'km' ? 300 : 225
 
     // Tick Config
-    property int bigTickInterval: units === 'km/h' ? 50 : 25
+    property int bigTickInterval: units === 'km' ? 50 : 25
     property int numBigTicks: maxDisplayableSpeed / bigTickInterval + 1
     property int numSmallTicks: numBigTicks * 5 - 4
     property real smallTickInterval: maxDisplayableSpeed / numSmallTicks
@@ -45,94 +47,40 @@ Item {
     /*
       Guage Outline
     */
-    Item {
+    GuageOutline {
+        angleStart: guageAngleStart - 1
+        sweepAngle: guageSweepAngle + 2
+
         anchors.fill: parent
-
-        Shape {
-            anchors.fill: parent
-
-            ShapePath {
-                strokeWidth: 10
-                strokeColor: "#35363a"
-                capStyle: ShapePath.FlatCap
-                fillColor: "transparent"
-
-                startX: 0; startY: 0
-
-                PathAngleArc {
-                    centerX: component.width / 2; centerY: component.height / 2
-                    radiusX: component.width / 2 - 10; radiusY: component.height / 2 - 10
-                    startAngle: guageAngleStart + 180
-                    sweepAngle: guageSweepAngle
-                }
-            }
-
-            ShapePath {
-                strokeWidth: 2
-                strokeColor: "white"
-                capStyle: ShapePath.FlatCap
-                fillColor: "transparent"
-
-                startX: 0; startY: 0
-
-                PathAngleArc {
-                    centerX: component.width / 2; centerY: component.height / 2
-                    radiusX: component.width / 2; radiusY: component.height / 2
-                    startAngle: guageAngleStart + 180 - 1
-                    sweepAngle: guageSweepAngle + 2
-                }
-            }
-        }
-
-        Item {
-            width: parent.width
-
-            rotation: guageAngleStart - 1
-            transformOrigin: Item.Center
-
-            anchors.centerIn: parent
-
-
-            Rectangle {
-                width: 15
-                height: 2
-
-                color: "white"
-
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-            }
-        }
-
-        Item {
-            width: parent.width
-
-            rotation: guageAngleEnd + 1
-            transformOrigin: Item.Center
-
-            anchors.centerIn: parent
-
-
-            Rectangle {
-                width: 15
-                height: 2
-
-                color: "white"
-
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-            }
-        }
     }
 
     /*
       Guage Fill
     */
     Shape {
+        visible: true
+
         width: component.width
         height: component.height
 
         anchors.centerIn: component
+
+
+        ShapePath {
+            strokeWidth: 10
+            strokeColor: "#292929"
+            capStyle: ShapePath.FlatCap
+            fillColor: "transparent"
+
+            startX: 0; startY: 0
+
+            PathAngleArc {
+                centerX: component.width / 2; centerY: component.height / 2
+                radiusX: component.width / 2 - 10; radiusY: component.height / 2 - 10
+                startAngle: guageAngleStart + 180
+                sweepAngle: guageSweepAngle
+            }
+        }
 
         ShapePath {
             strokeWidth: 10
@@ -188,7 +136,7 @@ Item {
                     verticalOffset: 0
                     radius: 5
                     samples: 10
-                    color: "#35363a"
+                    color: "#292929"
                 }
             }
 
@@ -244,9 +192,9 @@ Item {
       Units
     */
     Item {
-        width: parent.width + 15
+        width: parent.width + 20
 
-        rotation: -52.5
+        rotation: -50
         transformOrigin: Item.Center
 
         anchors.centerIn: parent
@@ -266,12 +214,12 @@ Item {
             Text {
                 id: unitText
 
-                text: units
+                text: units == 'km' ? 'km/h' : 'mph'
 
                 color: "gray"
                 font.bold: true
                 font.capitalization: Font.AllLowercase
-
+                font.pixelSize: 14
             }
 
             TextMetrics {
@@ -315,5 +263,21 @@ Item {
                 PathLine { x: 0; y: 10 }
             }
         }
+    }
+
+    /*
+      Odometer
+    */
+    Text {
+        text: odometer + ' ' + units
+
+        color: 'white'
+
+        font.bold: true
+        font.pixelSize: 20
+
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 }
