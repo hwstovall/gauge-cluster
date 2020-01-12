@@ -51,6 +51,8 @@ Item {
         angleStart: guageAngleStart - 1
         sweepAngle: guageSweepAngle + 2
 
+        showStops: true
+
         anchors.fill: parent
     }
 
@@ -64,23 +66,6 @@ Item {
         height: component.height
 
         anchors.centerIn: component
-
-
-        ShapePath {
-            strokeWidth: 10
-            strokeColor: "#292929"
-            capStyle: ShapePath.FlatCap
-            fillColor: "transparent"
-
-            startX: 0; startY: 0
-
-            PathAngleArc {
-                centerX: component.width / 2; centerY: component.height / 2
-                radiusX: component.width / 2 - 10; radiusY: component.height / 2 - 10
-                startAngle: guageAngleStart + 180
-                sweepAngle: guageSweepAngle
-            }
-        }
 
         ShapePath {
             strokeWidth: 10

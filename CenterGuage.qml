@@ -2,6 +2,8 @@ import QtQuick 2.11
 import QtGraphicalEffects 1.12
 import QtQuick.Shapes 1.14
 
+import "."
+
 Item {
     property int speed
     property string units
@@ -16,6 +18,8 @@ Item {
     GuageOutline {
         angleStart: guageAngleStart - 1
         sweepAngle: guageSweepAngle + 2
+
+        showStops: true
 
         anchors.fill: parent
     }
@@ -38,7 +42,7 @@ Item {
                     anchors.fill: parent
 
                     color: 'transparent'
-                    border.color: '#464646'
+                    border.color: Style.gray
                     border.width: 2
                     opacity: index / 10
 
@@ -73,7 +77,7 @@ Item {
 
         anchors.centerIn: parent
 
-        color: 'black'
+        color: Style.guageBackground
         border.color: 'white'
         border.width: 2
 

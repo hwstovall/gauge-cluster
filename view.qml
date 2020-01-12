@@ -18,6 +18,7 @@ Window {
     Item {
         property real speed: 0
         property real cruiseSpeed: 0
+        property real range: 283
 
         property string units: 'km'
 
@@ -95,6 +96,17 @@ Window {
             anchors.left: centerGuage.right
             anchors.leftMargin: cluster.guagePadding
             anchors.bottom: centerGuage.bottom
+        }
+
+
+        /*
+          Charge Guage
+        */
+        ChargeGuage {
+            range: debugHarness.range
+            units: debugHarness.units
+
+            anchors.fill: centerGuage
         }
     }
 }
