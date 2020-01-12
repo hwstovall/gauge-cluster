@@ -11,6 +11,41 @@ has one of the best digital clusters on the market right now, I decided to imple
 * January 12, 2019 - Started ChargeGuage.
 * January 11, 2019 - Layed out tri-guage layout.
 
+## Try it Out
+### Install
+* Ensure a working install of Qt 5 and Python 3
+* Install Python dependencies with `pip install -r requirements.txt`
+* Start the project with `python main.py`
+
+### Controls
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Up</td>
+      <td>Increase speed</td>
+    </tr>
+    <tr>
+      <td>Down</td>
+      <td>Decrease speed</td>
+    </tr>
+    <tr>
+      <td>U</td>
+      <td>Change units</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>Set cruise (speed must be greater than 25)</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## Design Resources
 * [Doug DeMuro - Here's Why the 2020 Porsche Taycan Is the Best Modern Porsche](https://www.youtube.com/watch?v=0vq6KEOIiMg)
 * [Caricos.com](https://www.caricos.com/cars/p/porsche/2020_porsche_taycan/images/44.html)
