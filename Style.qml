@@ -6,8 +6,8 @@ QtObject {
     property color lightGray: '#464646'
     property color lighterGray: '#696969'
 
-    property color guageBackground: 'black'
-    property color guageFill: gray
+    property color gaugeBackground: 'black'
+    property color gaugeFill: gray
 
     property color lowFuelColor: 'orange'
 }

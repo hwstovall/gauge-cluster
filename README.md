@@ -8,11 +8,12 @@ has one of the best digital clusters on the market right now, I decided to imple
 ![Current Screenshot](/images/current-screenshot.png)
 
 ## Changelog
-* January 12, 2019 - Implement ChargeGuage.
-* January 11, 2019 - Layed out tri-guage layout.
+* January 12, 2019 - Implement ChargeGauge.
+* January 11, 2019 - Layed out tri-gauge layout.
+* January 29, 2019 - Added gauge select mode.
 
 ## TODO
-* Figure out how to animate ChargeGuage flattening.
+* Figure out how to animate ChargeGauge flattening.
 * Source or create icons.
 
 ## Try it Out
@@ -56,15 +57,15 @@ has one of the best digital clusters on the market right now, I decided to imple
     </tr>
     <tr>
       <td>Enter / Return</td>
-      <td>Enter guage select mode.</td>
+      <td>Enter gauge select mode.</td>
     </tr>
     <tr>
       <td>G</td>
-      <td>Change selected guage.</td>
+      <td>Change selected gauge.</td>
     </tr>
     <tr>
-      <td>Up (in guage select mode)</td>
-      <td>Enter guage function select mode.</td>
+      <td>Up (in gauge select mode)</td>
+      <td>Enter gauge function select mode.</td>
     </tr>
   </tbody>
 </table>

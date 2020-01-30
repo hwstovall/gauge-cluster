@@ -14,7 +14,7 @@ Item {
     property string units
 
     /*
-      Guage Fill
+      Gauge Fill
     */
     Shape {
         id: fill
@@ -84,7 +84,7 @@ Item {
     }
 
     /*
-      Guage Outline
+      Gauge Outline
     */
     Shape {
         anchors.fill: parent

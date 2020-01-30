@@ -23,9 +23,9 @@ Item {
     property real smallTickInterval: maxDisplayableSpeed / numSmallTicks
 
     // Angles
-    property int guageSweepAngle: 280
-    property int guageAngleStart: -50
-    property int guageAngleEnd: guageAngleStart + guageSweepAngle
+    property int gaugeSweepAngle: 280
+    property int gaugeAngleStart: -50
+    property int gaugeAngleEnd: gaugeAngleStart + gaugeSweepAngle
 
     id: component
 
@@ -48,14 +48,14 @@ Item {
     }
 
     /*
-      Guage Outline
+      Gauge Outline
     */
-    GuageOutline {
+    GaugeOutline {
         selected: component.selected
         selectFunction: component.selectFunction
 
-        angleStart: guageAngleStart - 1
-        sweepAngle: guageSweepAngle + 2
+        angleStart: gaugeAngleStart - 1
+        sweepAngle: gaugeSweepAngle + 2
 
         showStops: true
 
@@ -63,7 +63,7 @@ Item {
     }
 
     /*
-      Guage Fill
+      Gauge Fill
     */
     Shape {
         visible: true
@@ -86,8 +86,8 @@ Item {
 
                 centerX: component.width / 2; centerY: component.height / 2
                 radiusX: component.width / 2 - 10; radiusY: component.height / 2 - 10
-                startAngle: guageAngleStart - 180
-                sweepAngle: speed > maxDisplayableSpeed ? guageSweepAngle : (guageSweepAngle / maxDisplayableSpeed) * speed
+                startAngle: gaugeAngleStart - 180
+                sweepAngle: speed > maxDisplayableSpeed ? gaugeSweepAngle : (gaugeSweepAngle / maxDisplayableSpeed) * speed
             }
         }
     }
@@ -101,7 +101,7 @@ Item {
         delegate: Item {
             width: component.width
 
-            rotation: (guageSweepAngle / (numBigTicks - 1)) * index - 50
+            rotation: (gaugeSweepAngle / (numBigTicks - 1)) * index - 50
             transformOrigin: Item.Center
 
             anchors.centerIn: parent
@@ -229,7 +229,7 @@ Item {
 
         width: parent.width + 22.5
 
-        rotation: cruiseSpeed > maxDisplayableSpeed ? guageAngleEnd : (guageSweepAngle / maxDisplayableSpeed) * cruiseSpeed - 50
+        rotation: cruiseSpeed > maxDisplayableSpeed ? gaugeAngleEnd : (gaugeSweepAngle / maxDisplayableSpeed) * cruiseSpeed - 50
         transformOrigin: Item.Center
 
         anchors.centerIn: parent

@@ -1,13 +1,13 @@
 {
     "files": [
-        "RightGuage.qml",
+        "RightGauge.qml",
         "Style.qml",
-        "CenterGuage.qml",
-        "LeftGuage.qml",
+        "CenterGauge.qml",
+        "LeftGauge.qml",
         "view.qml",
         "main.py",
-        "GuageOutline.qml",
-        "ChargeGuage.qml",
+        "GaugeOutline.qml",
+        "ChargeGauge.qml",
         "qmldir"
     ]
 }

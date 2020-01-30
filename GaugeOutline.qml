@@ -4,7 +4,7 @@ import QtQuick.Shapes 1.14
 import '.'
 
 /*
-  Guage Outline
+  Gauge Outline
 */
 Item {
     id: component
@@ -22,7 +22,7 @@ Item {
 
         ShapePath {
             strokeWidth: 10
-            strokeColor: Style.guageFill
+            strokeColor: Style.gaugeFill
             capStyle: ShapePath.FlatCap
             fillColor: "transparent"
 

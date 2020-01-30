@@ -11,21 +11,21 @@ Item {
     property int speed
     property string units
 
-    property int guageSweepAngle: 280
-    property int guageAngleStart: -50
-    property int guageAngleEnd: guageAngleStart + guageSweepAngle
+    property int gaugeSweepAngle: 280
+    property int gaugeAngleStart: -50
+    property int gaugeAngleEnd: gaugeAngleStart + gaugeSweepAngle
 
     id: component
 
     /*
-      Guage Outline
+      Gauge Outline
     */
-    GuageOutline {
+    GaugeOutline {
         selected: component.selected
         selectFunction: component.selectFunction
 
-        angleStart: guageAngleStart - 1
-        sweepAngle: guageSweepAngle + 2
+        angleStart: gaugeAngleStart - 1
+        sweepAngle: gaugeSweepAngle + 2
 
         showStops: true
 
@@ -85,7 +85,7 @@ Item {
 
         anchors.centerIn: parent
 
-        color: Style.guageBackground
+        color: Style.gaugeBackground
         border.color: 'white'
         border.width: 2
 

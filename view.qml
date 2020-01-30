@@ -4,7 +4,7 @@ import QtQuick.Window 2.2
 Window {
     id: window
 
-    title: "Guage Cluster"
+    title: "Gauge Cluster"
 
     width: 1400
     height: 600
@@ -24,9 +24,9 @@ Window {
 
         property int odometer: 12345
 
-        property bool selectGuage: false
-        property string selectedGuage: 'center'
-        property bool selectGuageFunction: false
+        property bool selectGauge: false
+        property string selectedGauge: 'center'
+        property bool selectGaugeFunction: false
 
         id: debugHarness
         focus: true
@@ -34,14 +34,14 @@ Window {
         // This control logic is rough. It will be cleaned up.
         Keys.onPressed: {
             if (event.key === Qt.Key_Up) {
-                if (selectGuage) {
-                    selectGuageFunction = true;
+                if (selectGauge) {
+                    selectGaugeFunction = true;
                 } else {
                     speed += 10;
                 }
             }
             else if (event.key === Qt.Key_Down) {
-                if (selectGuage) {
+                if (selectGauge) {
 
                 }
                 else if (speed > 0) {
@@ -64,23 +64,23 @@ Window {
             else if (event.key === Qt.Key_C) {
                 cruiseSpeed = cruiseSpeed == 0 && speed >= 25 ? speed : 0;
             }
-            else if (selectGuage && event.key === Qt.Key_G) {
+            else if (selectGauge && event.key === Qt.Key_G) {
                 var options = ['left', 'center', 'right'];
 
-                if (options.indexOf(selectedGuage) === options.length - 1) {
-                    selectedGuage = options[0];
+                if (options.indexOf(selectedGauge) === options.length - 1) {
+                    selectedGauge = options[0];
                 } else {
-                    selectedGuage = options[options.indexOf(selectedGuage) + 1];
+                    selectedGauge = options[options.indexOf(selectedGauge) + 1];
                 }
 
-                selectGuageFunction = false
+                selectGaugeFunction = false
             }
             else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                if (selectGuage) {
-                    selectGuageFunction = false;
+                if (selectGauge) {
+                    selectGaugeFunction = false;
                 }
 
-                selectGuage = !selectGuage;
+                selectGauge = !selectGauge;
             }
         }
     }
@@ -88,18 +88,18 @@ Window {
     Item {
         id: cluster
 
-        property int guagePadding: 50
+        property int gaugePadding: 50
 
         anchors.fill: parent
 
         /*
-          Center Guage
+          Center Gauge
         */
-        CenterGuage {
-            id: centerGuage
+        CenterGauge {
+            id: centerGauge
 
-            selected: debugHarness.selectGuage && debugHarness.selectedGuage === 'center'
-            selectFunction: debugHarness.selectGuageFunction
+            selected: debugHarness.selectGauge && debugHarness.selectedGauge === 'center'
+            selectFunction: debugHarness.selectGaugeFunction
 
             speed: debugHarness.speed
             units: debugHarness.units
@@ -111,11 +111,11 @@ Window {
         }
 
         /*
-          Left Guage
+          Left Gauge
         */
-        LeftGuage {
-            selected: debugHarness.selectGuage && debugHarness.selectedGuage === 'left'
-            selectFunction: debugHarness.selectGuageFunction
+        LeftGauge {
+            selected: debugHarness.selectGauge && debugHarness.selectedGauge === 'left'
+            selectFunction: debugHarness.selectGaugeFunction
 
             speed: debugHarness.speed
             cruiseSpeed: debugHarness.cruiseSpeed
@@ -127,36 +127,36 @@ Window {
             width: 400
             height: 400
 
-            anchors.right: centerGuage.left
-            anchors.rightMargin: cluster.guagePadding
-            anchors.bottom: centerGuage.bottom
+            anchors.right: centerGauge.left
+            anchors.rightMargin: cluster.gaugePadding
+            anchors.bottom: centerGauge.bottom
         }
 
         /*
-          Right Guage
+          Right Gauge
         */
-        RightGuage {
-            selected: debugHarness.selectGuage && debugHarness.selectedGuage === 'right'
-            selectFunction: debugHarness.selectGuageFunction
+        RightGauge {
+            selected: debugHarness.selectGauge && debugHarness.selectedGauge === 'right'
+            selectFunction: debugHarness.selectGaugeFunction
 
             width: 400
             height: 400
 
-            anchors.left: centerGuage.right
-            anchors.leftMargin: cluster.guagePadding
-            anchors.bottom: centerGuage.bottom
+            anchors.left: centerGauge.right
+            anchors.leftMargin: cluster.gaugePadding
+            anchors.bottom: centerGauge.bottom
         }
 
 
         /*
-          Charge Guage
+          Charge Gauge
         */
-        ChargeGuage {
+        ChargeGauge {
             range: 280 * debugHarness.charge
             units: debugHarness.units
             charge: debugHarness.charge
 
-            anchors.fill: centerGuage
+            anchors.fill: centerGauge
         }
     }
 }
