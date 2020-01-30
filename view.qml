@@ -24,15 +24,27 @@ Window {
 
         property int odometer: 12345
 
+        property bool selectGuage: false
+        property string selectedGuage: 'center'
+        property bool selectGuageFunction: false
+
         id: debugHarness
         focus: true
 
+        // This control logic is rough. It will be cleaned up.
         Keys.onPressed: {
             if (event.key === Qt.Key_Up) {
-                speed += 10;
+                if (selectGuage) {
+                    selectGuageFunction = true;
+                } else {
+                    speed += 10;
+                }
             }
             else if (event.key === Qt.Key_Down) {
-                if (speed > 0) {
+                if (selectGuage) {
+
+                }
+                else if (speed > 0) {
                     speed -= 10;
                 }
             }
@@ -52,6 +64,24 @@ Window {
             else if (event.key === Qt.Key_C) {
                 cruiseSpeed = cruiseSpeed == 0 && speed >= 25 ? speed : 0;
             }
+            else if (selectGuage && event.key === Qt.Key_G) {
+                var options = ['left', 'center', 'right'];
+
+                if (options.indexOf(selectedGuage) === options.length - 1) {
+                    selectedGuage = options[0];
+                } else {
+                    selectedGuage = options[options.indexOf(selectedGuage) + 1];
+                }
+
+                selectGuageFunction = false
+            }
+            else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                if (selectGuage) {
+                    selectGuageFunction = false;
+                }
+
+                selectGuage = !selectGuage;
+            }
         }
     }
 
@@ -68,6 +98,9 @@ Window {
         CenterGuage {
             id: centerGuage
 
+            selected: debugHarness.selectGuage && debugHarness.selectedGuage === 'center'
+            selectFunction: debugHarness.selectGuageFunction
+
             speed: debugHarness.speed
             units: debugHarness.units
 
@@ -81,6 +114,9 @@ Window {
           Left Guage
         */
         LeftGuage {
+            selected: debugHarness.selectGuage && debugHarness.selectedGuage === 'left'
+            selectFunction: debugHarness.selectGuageFunction
+
             speed: debugHarness.speed
             cruiseSpeed: debugHarness.cruiseSpeed
 
@@ -100,6 +136,9 @@ Window {
           Right Guage
         */
         RightGuage {
+            selected: debugHarness.selectGuage && debugHarness.selectedGuage === 'right'
+            selectFunction: debugHarness.selectGuageFunction
+
             width: 400
             height: 400
 

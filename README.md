@@ -31,7 +31,7 @@ has one of the best digital clusters on the market right now, I decided to imple
   </thead>
   <tbody>
     <tr>
-      <td>Up</td>
+      <td>Up (default)</td>
       <td>Increase speed</td>
     </tr>
     <tr>
@@ -53,6 +53,18 @@ has one of the best digital clusters on the market right now, I decided to imple
     <tr>
       <td>C</td>
       <td>Set cruise (speed must be greater than 25)</td>
+    </tr>
+    <tr>
+      <td>Enter / Return</td>
+      <td>Enter guage select mode.</td>
+    </tr>
+    <tr>
+      <td>G</td>
+      <td>Change selected guage.</td>
+    </tr>
+    <tr>
+      <td>Up (in guage select mode)</td>
+      <td>Enter guage function select mode.</td>
     </tr>
   </tbody>
 </table>

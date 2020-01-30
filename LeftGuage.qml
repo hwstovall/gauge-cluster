@@ -4,6 +4,9 @@ import QtQuick.Shapes 1.14
 
 
 Item {
+    property bool selected
+    property bool selectFunction
+
     property real speed
     property real cruiseSpeed
 
@@ -48,6 +51,9 @@ Item {
       Guage Outline
     */
     GuageOutline {
+        selected: component.selected
+        selectFunction: component.selectFunction
+
         angleStart: guageAngleStart - 1
         sweepAngle: guageSweepAngle + 2
 
