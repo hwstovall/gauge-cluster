@@ -108,7 +108,7 @@ pyobjc-framework-VideoToolbox==6.1
 pyobjc-framework-Vision==6.1
 pyobjc-framework-WebKit==6.1
 PySide2==5.14.0
-PyYAML==5.3
+PyYAML==5.4
 shiboken2==5.14.0
 sip==4.19.8
 six==1.13.0
